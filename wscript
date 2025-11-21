@@ -11,12 +11,12 @@ out = 'build_directory'
 
 def options(opt):
 	# command-line options provided by a waf tool
-	opt.tool_options('compiler_cxx')
+	opt.load('compiler_cxx')
 
 
 def configure(conf):
   print('→ configuring the project')
-  conf.check_tool('gcc g++ intltool')
+  conf.load('gcc g++ intltool')
   conf.env.CPPFLAGS  = ['-O2','-Wall']
   conf.env.CXXFLAGS  = ['-O2','-Wall','-fcommon']
   conf.recurse('gui-gtk')
@@ -63,8 +63,7 @@ def build(bld):
 
   bld(
     features     = 'cxx cprogram',
-    add_objects  = ['maincode',"main.o"],
-    use          = ['gui-gtk'],
+    use          = ['gui-gtk','maincode','main.o'],
     uselib       = ['GTK+-3.0','CAIRO','LIBXML-2.0','DL'],
     target       = bld.env.APPNAME,
   )
