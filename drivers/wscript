@@ -2,10 +2,10 @@
 # drivers
 def build(bld):
   print('→ building drivers')
-  drivers_base=["jtag_noname","willem","stk200","galblast","altera_byteblaster","xilinx_cable_iii","altera_byteblaster","funprog"]
+  drivers_base=["jtag_noname","willem","stk200","galblast","altera_byteblaster","xilinx_cable_iii","funprog"]
 
   for driver in drivers_base:
-    b=bld(
+    b=bld.shlib(
       features = 'cxx cxxshlib',
       source = driver+'.cpp',
       target=driver,
